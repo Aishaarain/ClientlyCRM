@@ -1,0 +1,13 @@
+{
+  "name": "freelancer-crm",
+  "version": "1.0.0",
+  "scripts": {
+  "dev": "npx kill-port 5173 5002 && concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "kill-port": "^2.0.1"
+  }
+}
