@@ -1,6 +1,6 @@
 import Task from "../models/Task.js";
 import Project from "../models/Project.js";
-import User from "../models/User.js";
+import User from "../models/user.js";
 import Workspace from "../models/workSpace.js";
 
 export const createTask = async (req, res) => {
