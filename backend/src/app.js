@@ -22,18 +22,20 @@ app.use(helmet());
 
 // ✅ First cors: dev allows all, prod restricts to CLIENT_URL
 app.use(cors({
-  origin: process.env.NODE_ENV === 'development'
-    ? true
-    : process.env.CLIENT_URL,
-  credentials: true,
+  origin: [
+    "https://cliently-crm-freelance.vercel.app",
+    "https://cliently-crm-freelance-git-main-aishaarains-projects.vercel.app",
+    "http://localhost:5173"
+  ],
+  credentials: true
 }));
 
 // ✅ Second cors: kills any origin not in allowedOrigins (your original logic kept)
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:5002',
-  process.env.CLIENT_URL,
-].filter(Boolean);
+// const allowedOrigins = [
+//   'http://localhost:5173',
+//   'http://localhost:5002',
+//   process.env.CLIENT_URL,
+// ].filter(Boolean);
 
 app.use(
   cors({
