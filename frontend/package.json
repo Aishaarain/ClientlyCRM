@@ -10,6 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+     "@vitejs/plugin-react": "latest",
     "@react-three/drei": "latest",
     "@react-three/fiber": "latest",
     "@tailwindcss/vite": "^4.3.1",
@@ -25,7 +26,6 @@
   },
   "devDependencies": {
     "@eslint/js": "latest",
-    "@vitejs/plugin-react": "latest",
     "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
