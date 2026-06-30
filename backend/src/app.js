@@ -49,5 +49,7 @@ connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   startRiskScanJob();
 });
-
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Cliently CRM API is running' });
+});
 export default app;
