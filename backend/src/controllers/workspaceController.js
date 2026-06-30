@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import Workspace from '../models/workspace.js';
-import Invite from '../models/Invite.js';
+import Invite from '../models/invite.js';
 import User from '../models/user.js';
 import { sendInviteEmail } from "../utils/Email.js";
 // ─── Create Workspace ───────────────────────────────────────────────
