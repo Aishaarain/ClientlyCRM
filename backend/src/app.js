@@ -3,7 +3,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
-import { startRiskScanJob } from './jobs/riskScan.js';
 import authRoutes from './routes/auth.js';
 import clientRoutes from './routes/clients.js';
 import projectRoutes from './routes/projects.js';
@@ -41,15 +40,13 @@ app.use('/api/v1/ai',           aiRoutes);
 app.use('/api/v1/team',         teamRoutes);
 app.use('/api/v1/workspaces',   workspaceRoutes);
 app.use('/api/v1/tasks',        taskRoutes);
-app.use(errorHandler);
 
-const PORT = process.env.PORT || 5001;
-
-connectDB().then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  startRiskScanJob();
-});
 app.get('/', (req, res) => {
   res.json({ status: 'ok', message: 'Cliently CRM API is running' });
 });
+
+app.use(errorHandler);
+
+connectDB();
+
 export default app;
