@@ -31,6 +31,15 @@ app.use(cors({
 
 app.use(express.json());
 
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use('/api/v1/auth',         authRoutes);
 app.use('/api/v1/clients',      clientRoutes);
 app.use('/api/v1/projects',     projectRoutes);
@@ -47,6 +56,5 @@ app.get('/', (req, res) => {
 
 app.use(errorHandler);
 
-connectDB();
 
 export default app;
