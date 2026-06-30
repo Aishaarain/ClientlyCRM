@@ -4,12 +4,16 @@ let isConnected = false;
 
 export const connectDB = async () => {
   if (isConnected) return;
+
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      bufferCommands: false,
+    });
     isConnected = true;
-    console.log('MongoDB connected');
+    console.log('MongoDB connected:', conn.connection.host);
   } catch (err) {
-    console.error('MongoDB connection error:', err);
-    process.exit(1);
+    isConnected = false;
+    console.error('MongoDB connection error:', err.message);
+    throw err;
   }
 };
