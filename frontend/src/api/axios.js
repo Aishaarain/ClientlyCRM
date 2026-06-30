@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const VITE_API_URL = 'https://cliently-backend.vercel.app/api/v1';
+const API_URL = 'https://cliently-backend.vercel.app/api/v1';
 
 const api = axios.create({
-  baseURL: VITE_API_URL,
+  baseURL: API_URL,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -26,5 +26,5 @@ api.interceptors.response.use(
   }
 );
 
-export { VITE_API_URL };
+export { API_URL };
 export default api;
