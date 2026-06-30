@@ -71,6 +71,7 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
+
 // Login
 router.post('/login', async (req, res, next) => {
   try {
@@ -80,11 +81,21 @@ router.post('/login', async (req, res, next) => {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
+    console.log('[LOGIN ATTEMPT]', { emailReceived: email, dbName: User.db?.name });
+
     const user = await User.findOne({ email }).select('+password');
-    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+    if (!user) {
+      console.log('[LOGIN FAIL] No user found for email:', email);
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    console.log('[LOGIN] User found:', { id: user._id, storedEmail: user.email, hasPassword: !!user.password });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      console.log('[LOGIN FAIL] Password mismatch for:', email);
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
     const token = createToken(user);
 
@@ -102,7 +113,6 @@ router.post('/login', async (req, res, next) => {
     next(err);
   }
 });
-
 // Send invite — admin only, using system email with replyTo
 router.post('/invite/send', protect, async (req, res, next) => {
   try {
