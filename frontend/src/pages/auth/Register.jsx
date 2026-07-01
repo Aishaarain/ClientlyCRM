@@ -32,10 +32,10 @@ export default function Register() {
       <ErrorBanner message={error} />
       <form className="space-y-4" onSubmit={handleSubmit}>
         <Field label="Full name">
-          <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Aisha Arain" />
+          <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Name" />
         </Field>
         <Field label="Email address">
-          <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="aisha@example.com" />
+          <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your Gmail" />
         </Field>
         <Field label="Password" hint="Minimum 6 characters">
           <Input type="password" required minLength={6} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="••••••••" />
