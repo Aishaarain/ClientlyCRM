@@ -4,7 +4,7 @@ import Invite from '../models/invite.js';
 import User from '../models/user.js';
 import { sendInviteEmail } from "../utils/Email.js";
 
-
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://cliently-crm-freelance.vercel.app";
 // ─── Create Workspace ───────────────────────────────────────────────
 export const createWorkspace = async (req, res) => {
   try {
