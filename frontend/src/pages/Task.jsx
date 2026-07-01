@@ -106,10 +106,7 @@ export default function Tasks() {
         eyebrow="Task Management"
         title="Tasks"
         description="Create tasks, assign them to your freelancers, and track progress."
-        actions={
-          <Button onClick={openModal}>
-            <Plus size={18} /> New task
-          </Button>
+        actions={null
         }
       />
 
