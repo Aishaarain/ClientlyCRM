@@ -34,7 +34,7 @@ export default function Login() {
       <ErrorBanner message={error} />
       <form className="space-y-4" onSubmit={handleSubmit}>
         <Field label="Email address">
-          <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="aisha@example.com" />
+          <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your Gmail" />
         </Field>
         <Field label="Password">
           <Input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="••••••••" />
@@ -42,7 +42,7 @@ export default function Login() {
         <Button type="submit" variant="gradient" size="lg" className="w-full" loading={loading}>Login</Button>
       </form>
       <p className="mt-6 text-center text-sm text-muted">
-        New to Velora? <Link className="font-black text-primary" to="/register">Create an account</Link>
+        New to Cliently? <Link className="font-black text-primary" to="/register">Create an account</Link>
       </p>
     </AuthShell>
   );
