@@ -117,7 +117,7 @@ export const sendInvite = async (req, res) => {
 
     const token = existing?.token || crypto.randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-    const inviteLink = `${process.env.FRONTEND_URL}/accept-invite?token=${token}`;
+    const inviteLink = `${https://cliently-crm-freelance.vercel.app/}/accept-invite?token=${token}`;
 
     // ✅ Try sending email FIRST before touching the DB
     try {
