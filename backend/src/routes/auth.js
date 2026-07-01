@@ -9,7 +9,7 @@ import { protect } from '../middleware/auth.js';
 import { sendInviteEmail } from '../utils/Email.js';
 
 const router = express.Router();
-FRONTEND_URL=https://cliently-crm-freelance.vercel.app
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://cliently-crm-freelance.vercel.app";
 const createToken = (user) => jwt.sign(
   {
     id: user._id,
