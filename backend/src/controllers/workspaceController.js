@@ -3,6 +3,8 @@ import Workspace from '../models/workSpace.js';
 import Invite from '../models/invite.js';
 import User from '../models/user.js';
 import { sendInviteEmail } from "../utils/Email.js";
+
+FRONTEND_URL=https://cliently-crm-freelance.vercel.app
 // ─── Create Workspace ───────────────────────────────────────────────
 export const createWorkspace = async (req, res) => {
   try {
@@ -117,7 +119,7 @@ export const sendInvite = async (req, res) => {
 
     const token = existing?.token || crypto.randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-    const inviteLink = `${https://cliently-crm-freelance.vercel.app/}/accept-invite?token=${token}`;
+  const inviteLink = `${process.env.FRONTEND_URL}/accept-invite?token=${inviteToken}`;
 
     // ✅ Try sending email FIRST before touching the DB
     try {
