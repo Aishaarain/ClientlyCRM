@@ -22,7 +22,6 @@ const createToken = (user) => jwt.sign(
   { expiresIn: '7d' }
 );
 
-const getFrontendUrl = () => process.env.FRONTEND_URL || process.env.CLIENT_URL || 'http://localhost:5173';
 
 // Register — creates admin + workspace
 router.post('/register', async (req, res, next) => {
@@ -78,7 +77,7 @@ router.post('/login', async (req, res, next) => {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    console.log('[LOGIN ATTEMPT]', { emailReceived: email, dbName: User.db?.name });
+  
 
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
@@ -86,11 +85,7 @@ router.post('/login', async (req, res, next) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-  console.log('[LOGIN ATTEMPT]', { 
-  emailReceived: email, 
-  passwordLength: password?.length, 
-  passwordRaw: JSON.stringify(password) 
-});
+  
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
@@ -141,7 +136,7 @@ router.post('/invite/send', protect, async (req, res, next) => {
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
-    const inviteLink = `${getFrontendUrl()}/accept-invite?token=${inviteToken}`;
+    const inviteLink = `${https://cliently-crm-freelance.vercel.app/}/accept-invite?token=${inviteToken}`;
 
    await sendInviteEmail({
   adminId: req.user.id,
@@ -158,7 +153,6 @@ router.post('/invite/send', protect, async (req, res, next) => {
   }
 });
 
-// Accept invite — freelancer sets name + password
 // Accept invite — freelancer sets name + password
 router.post('/invite/accept', async (req, res, next) => {
   try {
