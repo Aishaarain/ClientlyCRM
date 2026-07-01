@@ -209,7 +209,13 @@ export default function Projects() {
       
 
       <ErrorBanner message={error} />
-
+<PageHeader
+        eyebrow="Projects"
+        title="Projects"
+        description="Create projects, assign them to your freelancers, and track progress."
+        actions={null
+        }
+      />
       {!projects.length ? (
         <Card className="p-10 text-center">
           <h3 className="text-lg font-black text-ink">No projects found</h3>
