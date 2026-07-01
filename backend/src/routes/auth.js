@@ -136,7 +136,7 @@ router.post('/invite/send', protect, async (req, res, next) => {
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
-   const inviteLink = `${process.env.FRONTEND_URL}/accept-invite?token=${inviteToken}`;
+   const inviteLink = `${FRONTEND_URL}/accept-invite?token=${inviteToken}`;
 
    await sendInviteEmail({
   adminId: req.user.id,
