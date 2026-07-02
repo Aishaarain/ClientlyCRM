@@ -7,15 +7,19 @@ export const createClient = async (req, res) => {
   try {
     const { name, email, phone, company, address, status, notes } = req.body;
 
+    const userId = req.user?._id || req.user?.id;
+
+   
+
     const client = await Client.create({
       name,
-      email,
+      email: 
       phone,
       company,
       address,
       status: status || "active",
       notes,
-      createdBy: req.user._id,
+      createdBy: userId,
     });
 
     res.status(201).json({
@@ -23,6 +27,8 @@ export const createClient = async (req, res) => {
       client,
     });
   } catch (error) {
+    console.error("[CREATE CLIENT ERROR]", error);
+
     res.status(500).json({
       success: false,
       message: "Failed to create client",
@@ -30,13 +36,41 @@ export const createClient = async (req, res) => {
     });
   }
 };
-
 export const getClients = async (req, res) => {
   try {
+    const userId = req.user._id || req.user.id;
+
+    console.log("[GET CLIENTS USER]", {
+      userId,
+      role: req.user.role,
+      email: req.user.email,
+    });
+
+    const totalClients = await Client.countDocuments();
+
+    const sampleClients = await Client.find()
+      .select("_id name email createdBy createdAt")
+      .limit(5);
+
+    console.log("[CLIENT DB CHECK]", {
+      totalClients,
+      sampleClients: sampleClients.map((client) => ({
+        id: client._id,
+        name: client.name,
+        email: client.email,
+        createdBy: client.createdBy,
+      })),
+    });
+
     if (req.user.role === "admin") {
       const clients = await Client.find({
-        createdBy: req.user._id,
+        createdBy: userId,
       }).sort({ createdAt: -1 });
+
+      console.log("[ADMIN CLIENTS FOUND]", {
+        adminId: userId,
+        count: clients.length,
+      });
 
       return res.status(200).json({
         success: true,
@@ -44,12 +78,18 @@ export const getClients = async (req, res) => {
       });
     }
 
-    // Freelancer: only sees clients from their assigned projects
     const projects = await Project.find({
-      members: req.user._id,
+      members: userId,
     }).populate("client", "name email phone company address status notes");
 
+    console.log("[MEMBER PROJECTS FOUND]", {
+      userId,
+      count: projects.length,
+      projectClients: projects.map((project) => project.client?._id),
+    });
+
     const clientsMap = new Map();
+
     projects.forEach((project) => {
       if (project.client) {
         clientsMap.set(project.client._id.toString(), project.client);
@@ -57,6 +97,8 @@ export const getClients = async (req, res) => {
     });
 
     const clients = Array.from(clientsMap.values());
+
+    console.log("[MEMBER CLIENTS FOUND]", clients.length);
 
     res.status(200).json({
       success: true,
@@ -70,7 +112,6 @@ export const getClients = async (req, res) => {
     });
   }
 };
-
 // NEW — GET /api/clients/:id
 export const getClientById = async (req, res) => {
   try {
