@@ -205,17 +205,22 @@ export default function Projects() {
   if (loading) return <Loader label="Loading projects" />;
 
   return (
-    <div>
+    <div className="space-y-6">
       
 
       <ErrorBanner message={error} />
-<PageHeader
-        eyebrow="Projects"
-        title="Projects"
-        description="Create projects, assign them to your freelancers, and track progress."
-        actions={null
-        }
-      />
+ <PageHeader
+      eyebrow="Projects"
+      title="Projects"
+      description={pageDescription}
+      actions={
+        isAdmin ? (
+          <Button onClick={openCreateModal}>
+            <Plus size={18} /> Add project
+          </Button>
+        ) : null
+      }
+    />
       {!projects.length ? (
         <Card className="p-10 text-center">
           <h3 className="text-lg font-black text-ink">No projects found</h3>
