@@ -5,22 +5,46 @@ const clientSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim: true,
     },
-    email: String,
-    phone: String,
-    company: String,
+
+    email: {
+      type: String,
+      trim: true,
+    },
+
+    phone: {
+      type: String,
+      trim: true,
+    },
+
+    company: {
+      type: String,
+      trim: true,
+    },
+
+    address: {
+      type: String,
+    },
+
     status: {
       type: String,
+      enum: ["active", "inactive"],
       default: "active",
     },
-    lastContactDate: Date,
-    notes: String,
+
+    notes: {
+      type: String,
+    },
+
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const Client = mongoose.model("Client", clientSchema);
-
-export default Client;
+export default mongoose.model("Client", clientSchema);
