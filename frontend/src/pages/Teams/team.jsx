@@ -148,7 +148,7 @@ const [workspaceId, setWorkspaceId] = useState('');
             </div>
           </div>
           <p className="text-xs text-muted">
-            They will receive an email from Velora CRM. If they reply, the reply goes to your registered email.
+            They will receive an email from Cliently CRM. If they reply, the reply goes to your registered email.
           </p>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>Cancel</Button>
