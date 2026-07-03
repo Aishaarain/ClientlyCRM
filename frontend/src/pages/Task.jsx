@@ -106,8 +106,18 @@ export default function Tasks() {
         eyebrow="Task Management"
         title="Tasks"
         description="Create tasks, assign them to your freelancers, and track progress."
-        actions={null
-        }
+        <PageHeader
+      eyebrow="Projects"
+      title="Projects"
+      description={pageDescription}
+      actions={
+        isAdmin ? (
+          <Button onClick={openCreateModal}>
+            <Plus size={18} /> Add Task
+          </Button>
+        ) : null
+      }
+    />
       />
 
       <ErrorBanner message={error} />
