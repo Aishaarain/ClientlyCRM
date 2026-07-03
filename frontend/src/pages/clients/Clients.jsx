@@ -171,7 +171,7 @@ export default function Clients() {
        actions={
         isAdmin ? (
           <Button onClick={openCreateModal}>
-            <Plus size={18} /> Add project
+            <Plus size={18} /> Add client
           </Button>
         ) : null
       }
