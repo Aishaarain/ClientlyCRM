@@ -13,6 +13,7 @@ import { projectApi } from '../api/projectApi.js';
 import api from '../api/axios.js';
 import { formatDate } from '../utils/formatDate.js';
 import { toArray } from '../utils/normalize.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 const emptyForm = {
   title: '',
