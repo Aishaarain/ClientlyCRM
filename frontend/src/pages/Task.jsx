@@ -28,6 +28,7 @@ const priorityTone = { low: 'blue', medium: 'amber', high: 'pink' };
 const statusTone   = { todo: 'slate', 'in-progress': 'blue', completed: 'green' };
 
 export default function Tasks() {
+   const { isAdmin } = useAuth();
   const [tasks, setTasks]       = useState([]);
   const [projects, setProjects] = useState([]);
   const [members, setMembers]   = useState([]);
