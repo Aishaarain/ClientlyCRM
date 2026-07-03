@@ -106,11 +106,7 @@ export default function Tasks() {
         eyebrow="Task Management"
         title="Tasks"
         description="Create tasks, assign them to your freelancers, and track progress."
-        <PageHeader
-      eyebrow="Projects"
-      title="Projects"
-      description={pageDescription}
-      actions={
+        actions={
         isAdmin ? (
           <Button onClick={openCreateModal}>
             <Plus size={18} /> Add Task
