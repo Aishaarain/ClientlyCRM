@@ -168,8 +168,13 @@ export default function Clients() {
         eyebrow="Clients"
         title={isAdmin ? 'Clients' : 'Assigned Clients'}
         description={pageDescription}
-        actions={ null
-        }
+       actions={
+        isAdmin ? (
+          <Button onClick={openCreateModal}>
+            <Plus size={18} /> Add project
+          </Button>
+        ) : null
+      }
       />
 
       <ErrorBanner message={error} />
